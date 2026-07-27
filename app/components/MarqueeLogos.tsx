@@ -93,29 +93,29 @@ export default function MarqueeLogos() {
   }, []);
 
   return (
-    <div className="w-full overflow-hidden pb-10 pt-4">
+    <div className="w-full overflow-hidden">
       {/* Row 1 */}
-      <div className="flex w-[200%] md:w-[200vw] will-change-transform" ref={row1Ref}>
+      <div className="flex w-max will-change-transform" ref={row1Ref}>
         {[...row1Logos, ...row1Logos].map((src, i) => (
           <div
             key={`r1-${i}`}
-            className="w-full flex justify-center items-center px-4 md:px-12"
+            className="w-[100px] md:w-[140px] lg:w-[180px] shrink-0 flex justify-center items-center px-4"
           >
-            <img src={src} alt="Tournament Logo" className="h-16 md:h-24 w-auto object-contain brightness-50" />
+            <img src={src} alt="Tournament Logo" className="h-12 md:h-16 w-auto object-contain grayscale invert mix-blend-screen opacity-60 hover:opacity-100 transition-opacity duration-300" />
           </div>
         ))}
       </div>
 
-      <div className="h-12 md:h-20" />
+      <div className="h-8 md:h-16" />
 
       {/* Row 2 */}
-      <div className="flex w-[200%] md:w-[200vw] will-change-transform" ref={row2Ref}>
+      <div className="flex w-max will-change-transform" ref={row2Ref}>
         {[...row2Logos, ...row2Logos].map((src, i) => (
           <div
             key={`r2-${i}`}
-            className="w-full flex justify-center items-center px-4 md:px-12"
+            className="w-[100px] md:w-[140px] lg:w-[180px] shrink-0 flex justify-center items-center px-4"
           >
-            <img src={src} alt="Tournament Logo" className="h-16 md:h-24 w-auto object-contain brightness-50" />
+            <img src={src} alt="Tournament Logo" className="h-12 md:h-16 w-auto object-contain grayscale invert mix-blend-screen opacity-60 hover:opacity-100 transition-opacity duration-300" />
           </div>
         ))}
       </div>

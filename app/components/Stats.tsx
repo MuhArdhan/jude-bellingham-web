@@ -74,7 +74,7 @@ export default function Stats() {
   return (
     <section
       ref={containerRef}
-      className="min-h-screen flex flex-col justify-center py-32 px-6 md:px-20 bg-[#0a0a0a] border-t border-[#1a1a1a] relative"
+      className="min-h-screen flex flex-col justify-center py-32 bg-[#0a0a0a] border-t border-[#1a1a1a] relative"
     >
       <div className="w-full max-w-7xl mx-auto flex flex-col items-center">
         {/* Title */}
@@ -116,7 +116,7 @@ export default function Stats() {
       </div>
 
       {/* Marquee Logos at the bottom of Stats section */}
-      <div className="w-full mt-32 relative z-0">
+      <div className="w-full mt-24 relative z-0">
         <MarqueeLogos />
       </div>
     </section>
