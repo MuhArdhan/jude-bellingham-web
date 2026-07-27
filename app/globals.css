@@ -17,6 +17,11 @@ body {
   overflow-x: hidden;
 }
 
+::selection {
+  background-color: var(--color-gold);
+  color: var(--color-black);
+}
+
 html.lenis, html.lenis body {
   height: auto;
 }
