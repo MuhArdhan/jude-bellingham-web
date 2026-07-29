@@ -4,53 +4,108 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-// 9 images — varied positions and sizes for a crowded, editorial feel
+// 20 images — varied positions and sizes for a crowded, editorial feel
 const verticalImages = [
   {
-    src: "https://images.unsplash.com/photo-1551280857-2b9bbe52ccbd?q=80&w=800&auto=format&fit=crop",
+    src: "/image/journey/jude-1.jpg",
     style: { width: "22vw", left: "5%",  top: "10%" },
     aspect: "3/4",
   },
   {
-    src: "https://images.unsplash.com/photo-1521747113337-b930d6db11e2?q=80&w=800&auto=format&fit=crop",
+    src: "/image/journey/jude-2.jpg",
     style: { width: "18vw", right: "8%", top: "20%" },
     aspect: "4/5",
   },
   {
-    src: "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?q=80&w=800&auto=format&fit=crop",
+    src: "/image/journey/jude-3.jpg",
     style: { width: "32vw", left: "32%", top: "35%" },
     aspect: "16/9",
   },
   {
-    src: "https://images.unsplash.com/photo-1600250395378-953eb268a0a9?q=80&w=800&auto=format&fit=crop",
+    src: "/image/journey/jude-4.jpg",
     style: { width: "16vw", right: "20%", top: "55%" },
     aspect: "4/5",
   },
   {
-    src: "https://images.unsplash.com/photo-1579952363873-27f3bade9f55?q=80&w=800&auto=format&fit=crop",
+    src: "/image/journey/jude-5.jpg",
     style: { width: "24vw", left: "12%", top: "65%" },
     aspect: "3/4",
   },
   {
-    src: "https://images.unsplash.com/photo-1508344928928-7151b67de341?q=80&w=800&auto=format&fit=crop",
+    src: "/image/journey/jude-6.webp",
     style: { width: "20vw", right: "5%",  top: "75%" },
     aspect: "1/1",
   },
   {
-    src: "https://images.unsplash.com/photo-1522778119026-d647f0596c20?q=80&w=800&auto=format&fit=crop",
+    src: "/image/journey/jude-7.jpg",
     style: { width: "28vw", left: "55%", top: "80%" },
     aspect: "3/4",
   },
   {
-    src: "https://images.unsplash.com/photo-1543326727-cf6c39e8f84c?q=80&w=800&auto=format&fit=crop",
+    src: "/image/journey/jude-8.jpg",
     style: { width: "14vw", left: "3%",  top: "85%" },
+    aspect: "1/2",
+  },
+  {
+    src: "/image/journey/jude-9.jpg",
+    style: { width: "20vw", left: "40%", top: "80%" },
+    aspect: "2/3",
+  },
+  {
+    src: "/image/journey/jude-10.webp",
+    style: { width: "20vw", right: "55%", top: "5%" },
+    aspect: "4/5",
+  },
+  {
+    src: "/image/journey/jude-11.jpg",
+    style: { width: "26vw", left: "10%", top: "28%" },
+    aspect: "3/4",
+  },
+  {
+    src: "/image/journey/jude-12.jpg",
+    style: { width: "18vw", right: "12%", top: "45%" },
     aspect: "1/1",
   },
   {
-    src: "https://images.unsplash.com/photo-1518605368461-1ee7e30d885a?q=80&w=800&auto=format&fit=crop",
-    style: { width: "30vw", left: "35%", top: "90%" },
+    src: "/image/journey/jude-13.jpg",
+    style: { width: "22vw", left: "45%", top: "60%" },
+    aspect: "3/4",
+  },
+  {
+    src: "/image/journey/jude-14.jpg",
+    style: { width: "28vw", left: "8%", top: "70%" },
     aspect: "16/9",
   },
+  {
+    src: "/image/journey/jude-15.jpg",
+    style: { width: "16vw", right: "15%", top: "85%" },
+    aspect: "3/4",
+  },
+  {
+    src: "/image/journey/jude-16.webp",
+    style: { width: "24vw", left: "10%", top: "60%" },
+    aspect: "4/5",
+  },
+  {
+    src: "/image/journey/jude-17.jpg",
+    style: { width: "14vw", right: "25%", top: "10%" },
+    aspect: "3/4",
+  },
+  {
+    src: "/image/journey/jude-18.jpg",
+    style: { width: "30vw", left: "20%", top: "50%" },
+    aspect: "16/9",
+  },
+  {
+    src: "/image/journey/jude-19.jpg",
+    style: { width: "20vw", right: "2%", top: "35%" },
+    aspect: "3/4",
+  },
+  {
+    src: "/image/journey/jude-20.webp",
+    style: { width: "26vw", left: "30%", top: "30%" },
+    aspect: "4/5",
+  }
 ];
 
 export default function VerticalGallery() {

@@ -3,11 +3,52 @@
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 
-const images = [
-  "https://images.unsplash.com/photo-1579952363873-27f3bade9f55?q=80&w=1000&auto=format&fit=crop", // Placeholder 1
-  "https://images.unsplash.com/photo-1508344928928-7151b67de341?q=80&w=1000&auto=format&fit=crop", // Placeholder 2
-  "https://images.unsplash.com/photo-1522778119026-d647f0596c20?q=80&w=1000&auto=format&fit=crop", // Placeholder 3
-  "https://images.unsplash.com/photo-1543326727-cf6c39e8f84c?q=80&w=1000&auto=format&fit=crop", // Placeholder 4
+const achievements = [
+  {
+    src: "/image/achievement/dfb.jpg",
+    title: "DFB-Pokal",
+    year: "20/21"
+  },
+  {
+    src: "/image/achievement/bundesliga-pots.webp",
+    title: "Bundesliga POTS",
+    year: "22/23"
+  },
+  {
+    src: "/image/achievement/golden-boy.jpg",
+    title: "Golden Boy",
+    year: "2023"
+  },
+  {
+    src: "/image/achievement/supercopa.jpg",
+    title: "Supercopa de España",
+    year: "23/24"
+  },
+  {
+    src: "/image/achievement/laliga.jpg",
+    title: "La Liga",
+    year: "23/24"
+  },
+  {
+    src: "/image/achievement/laliga-pots.webp",
+    title: "La Liga POTS",
+    year: "23/24"
+  },
+  {
+    src: "/image/achievement/ucl.jpg",
+    title: "UEFA Champions League",
+    year: "23/24"
+  },
+  {
+    src: "/image/achievement/uefa-supercup.jpg",
+    title: "UEFA Super Cup",
+    year: "2024"
+  },
+  {
+    src: "/image/achievement/fifa-inter.jpg",
+    title: "FIFA Intercontinental Cup",
+    year: "2024"
+  }
 ];
 
 export default function HorizontalScroll() {
@@ -16,18 +57,23 @@ export default function HorizontalScroll() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      const scrollWidth = scrollRef.current?.scrollWidth || 0;
-      const windowWidth = window.innerWidth;
-      
       gsap.to(scrollRef.current, {
-        x: -(scrollWidth - windowWidth),
+        x: () => {
+          const scrollWidth = scrollRef.current?.scrollWidth || 0;
+          const windowWidth = window.innerWidth;
+          return -(scrollWidth - windowWidth);
+        },
         ease: "none",
         scrollTrigger: {
           trigger: containerRef.current,
           pin: true,
           scrub: 1,
           start: "top top",
-          end: () => `+=${scrollWidth}`,
+          end: () => {
+            const scrollWidth = scrollRef.current?.scrollWidth || 0;
+            const windowWidth = window.innerWidth;
+            return `+=${scrollWidth - windowWidth}`;
+          },
           invalidateOnRefresh: true,
         },
       });
@@ -51,21 +97,25 @@ export default function HorizontalScroll() {
         className="h-full flex items-center gap-12 px-[10vw]"
         style={{ width: "fit-content" }}
       >
-        {images.map((src, i) => (
+        {achievements.map((item, i) => (
           <div
             key={i}
             className="w-[70vw] md:w-[40vw] h-[60vh] md:h-[70vh] shrink-0 relative overflow-hidden rounded-sm group"
           >
             <img
-              src={src}
-              alt={`Gallery ${i}`}
-              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 grayscale group-hover:grayscale-0"
+              src={item.src}
+              alt={item.title}
+              loading="lazy"
+              decoding="async"
+              className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105 grayscale group-hover:grayscale-0"
             />
             <div className="absolute inset-0 bg-black/40 group-hover:bg-black/10 transition-colors duration-700" />
-            <div className="absolute bottom-8 left-8 font-[var(--font-oswald)]">
-              <span className="text-[#CFB53B] text-xl font-bold">0{i + 1}</span>
-              <h3 className="text-white text-3xl md:text-5xl font-bold uppercase mt-2">
-                Moment {i + 1}
+            <div className="absolute bottom-8 left-8 right-8 font-[var(--font-oswald)]">
+              <span className="text-[#CFB53B] text-xl font-bold">
+                {item.year}
+              </span>
+              <h3 className="text-white text-3xl md:text-5xl font-bold uppercase mt-2 leading-tight">
+                {item.title}
               </h3>
             </div>
           </div>
