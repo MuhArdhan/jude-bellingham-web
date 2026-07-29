@@ -101,7 +101,7 @@ export default function MarqueeLogos() {
             key={`r1-${i}`}
             className="w-[100px] md:w-[140px] lg:w-[180px] shrink-0 flex justify-center items-center px-4"
           >
-            <img src={src} alt="Tournament Logo" className="h-12 md:h-16 w-auto object-contain grayscale invert mix-blend-screen opacity-60 hover:opacity-100 transition-opacity duration-300" />
+            <img src={src} alt="Tournament Logo" loading="lazy" decoding="async" className="h-12 md:h-16 w-auto object-contain grayscale invert mix-blend-screen opacity-60 hover:opacity-100 transition-opacity duration-300 transform-gpu" />
           </div>
         ))}
       </div>
@@ -115,7 +115,7 @@ export default function MarqueeLogos() {
             key={`r2-${i}`}
             className="w-[100px] md:w-[140px] lg:w-[180px] shrink-0 flex justify-center items-center px-4"
           >
-            <img src={src} alt="Tournament Logo" className="h-12 md:h-16 w-auto object-contain grayscale invert mix-blend-screen opacity-60 hover:opacity-100 transition-opacity duration-300" />
+            <img src={src} alt="Tournament Logo" loading="lazy" decoding="async" className="h-12 md:h-16 w-auto object-contain grayscale invert mix-blend-screen opacity-60 hover:opacity-100 transition-opacity duration-300 transform-gpu" />
           </div>
         ))}
       </div>

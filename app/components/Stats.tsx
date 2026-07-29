@@ -79,7 +79,7 @@ export default function Stats() {
       <div className="w-full max-w-7xl mx-auto flex flex-col items-center">
         {/* Title */}
         <h2 
-          className="text-4xl md:text-6xl font-[var(--font-oswald)] uppercase font-bold text-white mb-20 tracking-wider text-center"
+          className="text-4xl md:text-6xl font-[var(--font-oswald)] uppercase font-bold text-white mb-20 tracking-wider text-center opacity-0 translate-y-12 will-change-[opacity,transform]"
           ref={(el) => {
             if (el && !itemsRef.current.includes(el)) {
               itemsRef.current.unshift(el);
@@ -97,13 +97,13 @@ export default function Stats() {
               ref={(el) => {
                 itemsRef.current[i + 1] = el;
               }}
-              className="flex flex-col items-center justify-center font-[var(--font-oswald)]"
+              className="flex flex-col items-center justify-center font-[var(--font-oswald)] opacity-0 translate-y-12 will-change-[opacity,transform]"
             >
               <div 
                 ref={(el) => {
                   numbersRef.current[i] = el;
                 }}
-                className="text-[10vw] md:text-[8vw] leading-none text-[#CFB53B] font-bold"
+                className="text-[10vw] md:text-[8vw] leading-none text-[#CFB53B] font-bold tabular-nums"
               >
                 0{stat.suffix}
               </div>

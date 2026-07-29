@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-const quoteText = "You have to play with a smile on your face and just enjoy it. Because football is the best job in the world.";
+const quoteText = "If you only love football for the game, you will always be rewarded. If you play for attention and fame, that's not the right way to do it.";
 
 export default function Quote() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -58,7 +58,7 @@ export default function Quote() {
   return (
     <section
       ref={containerRef}
-      className="py-32 px-6 md:px-20 bg-[#0a0a0a] min-h-[50vh] flex flex-col items-center justify-center relative overflow-hidden"
+      className="py-16 px-6 md:px-20 bg-[#0a0a0a] min-h-screen flex flex-col items-center justify-center relative overflow-hidden"
     >
       {/* Background Accent */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] max-w-[600px] max-h-[600px] bg-[#CFB53B]/5 rounded-full blur-[100px] pointer-events-none" />
