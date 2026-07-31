@@ -17,7 +17,7 @@ export default function LenisProvider({ children }: { children: ReactNode }) {
     // Initialize Lenis
     const lenis = new Lenis({
       duration: 1.6,
-      easing: (t) => 1 - Math.pow(1 - t, 5), 
+      easing: (t) => 1 - Math.pow(1 - t, 5),
       orientation: "vertical",
       gestureOrientation: "vertical",
       smoothWheel: true,
@@ -25,6 +25,10 @@ export default function LenisProvider({ children }: { children: ReactNode }) {
       touchMultiplier: 2,
     });
     lenisRef.current = lenis;
+
+    // Force scroll to top on reload to prevent erratic browser scroll restoration
+    window.scrollTo(0, 0);
+    lenis.scrollTo(0, { immediate: true });
 
     // Sync GSAP ScrollTrigger with Lenis
     lenis.on("scroll", ScrollTrigger.update);

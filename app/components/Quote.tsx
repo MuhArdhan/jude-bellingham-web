@@ -2,7 +2,6 @@
 
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const quoteText = "If you only love football for the game, you will always be rewarded. If you play for attention and fame, that's not the right way to do it.";
 
@@ -26,7 +25,7 @@ export default function Quote() {
             trigger: containerRef.current,
             start: "top 70%",
             end: "bottom 25%",
-            toggleActions: "play none none reverse",
+            once: true,
           },
         }
       );
@@ -44,7 +43,7 @@ export default function Quote() {
             trigger: containerRef.current,
             start: "top 70%",
             end: "bottom 25%",
-            toggleActions: "play none none reverse",
+            once: true,
           },
         }
       );
@@ -71,7 +70,7 @@ export default function Quote() {
             ref={(el) => { quoteMarksRef.current[0] = el; }}
             className="text-[#CFB53B] text-5xl md:text-8xl leading-none inline-block origin-bottom mr-2"
           >
-            "
+            &quot;
           </span>
           
           {words.map((word, i) => (
@@ -89,7 +88,7 @@ export default function Quote() {
             ref={(el) => { quoteMarksRef.current[1] = el; }}
             className="text-[#CFB53B] text-5xl md:text-8xl leading-none inline-block origin-top ml-2 self-end"
           >
-            "
+            &quot;
           </span>
         </h2>
 

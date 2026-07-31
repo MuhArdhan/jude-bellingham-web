@@ -34,7 +34,7 @@ export default function Stats() {
               trigger: item,
               start: "top 80%",
               end: "bottom 20%",
-              toggleActions: "play none none reverse",
+              once: true,
             },
           }
         );
@@ -56,7 +56,7 @@ export default function Stats() {
               trigger: item,
               start: "top 80%",
               end: "bottom 20%",
-              toggleActions: "play none none reverse",
+              once: true,
             },
             onUpdate: () => {
               if (numberEl) {
@@ -78,14 +78,7 @@ export default function Stats() {
     >
       <div className="w-full max-w-7xl mx-auto flex flex-col items-center">
         {/* Title */}
-        <h2 
-          className="text-4xl md:text-6xl font-[var(--font-oswald)] uppercase font-bold text-white mb-20 tracking-wider text-center opacity-0 translate-y-12 will-change-[opacity,transform]"
-          ref={(el) => {
-            if (el && !itemsRef.current.includes(el)) {
-              itemsRef.current.unshift(el);
-            }
-          }}
-        >
+        <h2 className="text-4xl md:text-6xl font-[var(--font-oswald)] uppercase font-bold text-white mb-20 tracking-wider text-center">
           Career <span className="text-[#CFB53B]">Achievements</span>
         </h2>
 
