@@ -58,160 +58,138 @@ const erasData = [
   }
 ];
 
-function EraSection({ era }: { era: typeof erasData[0] }) {
+export default function VerticalGallery() {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const logoRef = useRef<HTMLImageElement>(null);
-  const marqueeRef = useRef<HTMLHeadingElement>(null);
-  const imagesRef = useRef<(HTMLDivElement | null)[]>([]);
+  const marqueeWrapperRef = useRef<HTMLDivElement>(null);
+  const logosRef = useRef<(HTMLImageElement | null)[]>([]);
+
+  const imagesRefs = useRef<(HTMLDivElement | null)[][]>(
+    erasData.map(() => [])
+  );
 
   useEffect(() => {
-    if (!sectionRef.current || !logoRef.current || !marqueeRef.current) return;
+    if (!sectionRef.current) return;
 
     const ctx = gsap.context(() => {
-      const vh = window.innerHeight;
-      const imgCount = imagesRef.current.length;
-
-      // Configuration for animations
-      const animDuration = vh * 1.5;
-      const staggerOffset = vh * 0.4;
-      const logoDelaySpace = vh * 0.5;
-      const introScrollSpace = vh * 1.2;
-      const tailScrollSpace = vh * 1.5;
-
-      // Set the total scrollable height for this journey Section
-      const totalScrollSpace = logoDelaySpace + introScrollSpace + ((imgCount - 1) * staggerOffset) + animDuration + tailScrollSpace;
-      sectionRef.current!.style.height = `${totalScrollSpace}px`;
-
-      // Logo starts big and scales down
-      gsap.fromTo(logoRef.current,
-        { scale: 3, opacity: 0 },
-        {
-          scale: 1, opacity: 1,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: `top+=${logoDelaySpace} top`,
-            end: `+=${introScrollSpace}`,
-            scrub: true,
-          }
+      // Main timeline controlling all scroll-bound animations
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top top",
+          end: "bottom bottom",
+          scrub: 1, 
         }
-      );
-
-      // Logo moves up after zooming in
-      gsap.fromTo(logoRef.current,
-        { y: "0vh" },
-        {
-          y: "-150vh",
-          ease: "none",
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: `top+=${logoDelaySpace + introScrollSpace} top`,
-            end: `top+=${logoDelaySpace + introScrollSpace + (vh * 1.5)} top`,
-            scrub: true,
-          }
-        }
-      );
-
-      // Text moving continuously
-      gsap.fromTo(marqueeRef.current,
-        { xPercent: 0 },
-        {
-          xPercent: -30,
-          ease: "none",
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top top",
-            end: "bottom bottom",
-            scrub: true,
-          }
-        }
-      );
-
-      // Parallax Images Animation
-      imagesRef.current.forEach((img, i) => {
-        if (!img) return;
-
-        const startPx = logoDelaySpace + introScrollSpace + (i * staggerOffset);
-        const endPx = startPx + animDuration;
-
-        gsap.fromTo(
-          img,
-          { y: "110vh", opacity: 1 },
-          {
-            keyframes: [
-              { y: "0vh", opacity: 1, ease: "linear" },
-              { y: "-100vh", opacity: 0, ease: "linear" },
-            ],
-            scrollTrigger: {
-              trigger: sectionRef.current,
-              start: `top+=${startPx} top`,
-              end: `top+=${endPx} top`,
-              scrub: true,
-            },
-          }
-        );
       });
 
-      setTimeout(() => ScrollTrigger.refresh(), 100);
-    });
+      const eraDuration = 10; 
+      const initialBuffer = 1; 
+      const totalDuration = initialBuffer + (erasData.length * eraDuration);
+
+      // Continuous background marquee moving leftwards
+      tl.to(marqueeWrapperRef.current, {
+        x: () => {
+          const scrollWidth = marqueeWrapperRef.current?.scrollWidth || 0;
+          const windowWidth = window.innerWidth;
+          return -(scrollWidth - windowWidth);
+        },
+        ease: "none",
+        duration: totalDuration
+      }, 0);
+
+      erasData.forEach((era, i) => {
+        const eraStart = initialBuffer + (i * eraDuration);
+
+        // Club logo zooms in and immediately flies up
+        tl.fromTo(logosRef.current[i],
+          { scale: 3, opacity: 0, y: "0vh" },
+          { scale: 1, opacity: 1, duration: 1.5, ease: "power2.out" },
+          eraStart);
+
+        tl.to(logosRef.current[i],
+          { y: "-150vh", duration: 3, ease: "none" },
+          eraStart + 1.5);
+
+        tl.set(logosRef.current[i], { opacity: 0 }, eraStart + 4.5);
+
+        // Staggered parallax images flying upwards
+        const imgCount = era.images.length;
+        const spawnDuration = 3.5;
+        const imgStagger = spawnDuration / imgCount;
+        const flyDuration = 4.5;
+
+        era.images.forEach((_, imgIdx) => {
+          const imgRef = imagesRefs.current[i][imgIdx];
+          if (!imgRef) return;
+
+          const imgStart = eraStart + 1.5 + (imgIdx * imgStagger);
+
+          tl.fromTo(imgRef,
+            { y: "150vh", opacity: 1 },
+            { y: "-250vh", opacity: 1, duration: flyDuration, ease: "none" },
+            imgStart);
+
+          tl.set(imgRef, { opacity: 0 }, imgStart + flyDuration);
+        });
+      });
+
+    }, sectionRef);
 
     return () => ctx.revert();
   }, []);
 
   return (
-    <div ref={sectionRef} className="relative w-full bg-[#0a0a0a]">
+    <section ref={sectionRef} className="relative w-full h-[3000vh] bg-[#0a0a0a]">
+
       <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden">
-
-        {/* Background Text */}
-        <div className="absolute inset-0 flex items-center justify-start opacity-10 font-[var(--font-oswald)] pointer-events-none z-0">
-          <h1
-            ref={marqueeRef}
-            className="text-[25vw] whitespace-nowrap uppercase font-bold text-white tracking-tighter px-8"
+        <div className="absolute inset-0 flex items-center justify-start z-0 overflow-hidden opacity-10 pointer-events-none">
+          <div
+            ref={marqueeWrapperRef}
+            className="flex items-center h-full will-change-transform w-max px-8"
           >
-            {era.name} <span className="mx-8">•</span> {era.name} <span className="mx-8">•</span> {era.name} <span className="mx-8">•</span> {era.name}
-          </h1>
+            {erasData.map((era, i) => (
+              <div key={`marquee-${i}`} className="shrink-0 flex items-center whitespace-nowrap">
+                <h1 className="text-[25vw] uppercase font-bold text-white tracking-tighter leading-none">
+                  {era.name} <span className="mx-8 md:mx-16">•</span> {era.name} <span className="mx-8 md:mx-16">•</span> {era.name} <span className="mx-8 md:mx-16">•</span>
+                </h1>
+              </div>
+            ))}
+          </div>
         </div>
 
-        {/* Club Logo */}
-        <img
-          ref={logoRef}
-          src={era.logo}
-          alt={era.name}
-          className="w-40 md:w-64 h-auto object-contain z-10 drop-shadow-2xl opacity-0 transform scale-0"
-        />
+        {erasData.map((era, i) => (
+          <div key={`era-container-${i}`} className="absolute inset-0 flex items-center justify-center pointer-events-none">
 
-        {/* Era Images */}
-        <div className="absolute inset-0 w-full h-full pointer-events-none z-20">
-          {era.images.map((img, i) => (
-            <div
-              key={i}
-              ref={(el) => {
-                imagesRef.current[i] = el;
-              }}
-              className="absolute rounded-sm overflow-hidden shadow-2xl shadow-black/60 transition-[filter] duration-700"
-              style={img.style as React.CSSProperties}
-            >
-              <img
-                src={img.src}
-                alt={`Jude Bellingham ${era.name} ${i + 1}`}
-                className="w-full h-full object-cover"
-                style={{ aspectRatio: img.aspect }}
-              />
+            {/* Club Logo */}
+            <img
+              ref={(el) => { logosRef.current[i] = el; }}
+              src={era.logo}
+              alt={era.name}
+              className="w-40 md:w-64 h-auto object-contain z-10 drop-shadow-2xl opacity-0"
+            />
+
+            {/* Era Images */}
+            <div className="absolute inset-0 w-full h-full z-20">
+              {era.images.map((img, imgIdx) => (
+                <div
+                  key={`img-${i}-${imgIdx}`}
+                  ref={(el) => { imagesRefs.current[i][imgIdx] = el; }}
+                  className="absolute rounded-sm overflow-hidden shadow-2xl shadow-black/60 opacity-0 transform"
+                  style={img.style as React.CSSProperties}
+                >
+                  <img
+                    src={img.src}
+                    alt={`Jude Bellingham ${era.name} ${imgIdx + 1}`}
+                    className="w-full h-full object-cover"
+                    style={{ aspectRatio: img.aspect }}
+                  />
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
+
+          </div>
+        ))}
 
       </div>
-    </div>
-  );
-}
-
-export default function VerticalGallery() {
-  return (
-    <div className="relative bg-[#0a0a0a]">
-      {erasData.map((era, index) => (
-        <EraSection key={index} era={era} />
-      ))}
-    </div>
+    </section>
   );
 }

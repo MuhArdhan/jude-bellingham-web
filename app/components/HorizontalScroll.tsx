@@ -84,7 +84,7 @@ export default function HorizontalScroll() {
 
   return (
     <section ref={containerRef} className="h-screen w-full bg-[#0a0a0a] overflow-hidden relative">
-      
+
       {/* Background Title */}
       <div className="absolute top-1/2 -translate-y-1/2 left-0 w-full text-center opacity-5 pointer-events-none font-[var(--font-oswald)]">
         <h2 className="text-[20vw] whitespace-nowrap text-white font-bold uppercase leading-none">
@@ -120,7 +120,7 @@ export default function HorizontalScroll() {
             </div>
           </div>
         ))}
-        
+
         {/* Extra space at the end to make scroll smoother */}
         <div className="w-[10vw] shrink-0"></div>
       </div>
