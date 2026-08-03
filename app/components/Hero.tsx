@@ -16,6 +16,7 @@ export default function Hero() {
   const judeTextRef = useRef<SVGTextElement>(null);
   const bellTextRef = useRef<SVGTextElement>(null);
   const preloaderBgRef = useRef<HTMLDivElement>(null);
+  const loadingBarRef = useRef<HTMLDivElement>(null);
   const bottomNavRef = useRef<HTMLDivElement>(null);
 
   const [isAnimating, setIsAnimating] = useState(true);
@@ -23,6 +24,11 @@ export default function Hero() {
   useEffect(() => {
     // Lock scroll position during initialization
     document.body.style.overflow = "hidden";
+    
+    // Prevent browser from restoring scroll position on refresh
+    if ("scrollRestoration" in history) {
+      history.scrollRestoration = "manual";
+    }
     window.scrollTo(0, 0);
 
     let ctx: gsap.Context;
@@ -116,12 +122,22 @@ export default function Hero() {
         gsap.set(imageRef.current, { yPercent: 100 });
         gsap.set(bottomNavRef.current, { opacity: 0, y: 20 });
         gsap.set(preloaderBgRef.current, { opacity: 1 });
+        
+        // Setup Loading Bar right below the text, aligned to left edge of JUDE
+        gsap.set(loadingBarRef.current, { 
+          left: judeTargetLeft, 
+          top: targetBaselineY + (window.innerWidth < 768 ? 15 : 25), 
+          width: 0, 
+          opacity: 1 
+        });
 
         // Execute sequential drawing and transition animations
-        tl.to(judeTextRef.current, { strokeDashoffset: 0, duration: 1.5, ease: "power2.inOut" }, 0.5);
-        tl.to(bellTextRef.current, { strokeDashoffset: 0, duration: 2.0, ease: "power2.inOut" }, 0.5);
+        tl.to(loadingBarRef.current, { width: totalW, duration: 3.0, ease: "power2.inOut" }, 0.5);
+        tl.to(judeTextRef.current, { strokeDashoffset: 0, duration: 2.5, ease: "power2.inOut" }, 0.5);
+        tl.to(bellTextRef.current, { strokeDashoffset: 0, duration: 3.0, ease: "power2.inOut" }, 0.5);
         tl.to(bellTextRef.current, { fill: "#ffffff", duration: 0.8, ease: "power2.inOut" }, "colorChange");
         tl.to(judeTextRef.current, { stroke: "#CFB53B", duration: 0.8, ease: "power2.inOut" }, "colorChange");
+        tl.to(loadingBarRef.current, { opacity: 0, duration: 0.8, ease: "power2.inOut" }, "colorChange");
         tl.to({}, { duration: 0.5 });
         tl.to(textRef1.current, { x: 0, y: 0, scale: 1, duration: 1.5, ease: "power4.inOut" }, "layout");
         tl.to(textRef2.current, { x: 0, y: 0, scale: 1, duration: 1.5, ease: "power4.inOut" }, "layout");
@@ -195,6 +211,11 @@ export default function Hero() {
         className="absolute inset-0 bg-[#0a0a0a] z-10 pointer-events-none"
       />
 
+      <div 
+        ref={loadingBarRef}
+        className="absolute h-[2px] bg-[#CFB53B] z-50 pointer-events-none"
+      />
+
       <div className={`z-20 flex flex-col w-full px-6 md:px-16 font-[var(--font-oswald)] uppercase leading-none relative mt-16 ${isAnimating ? 'pointer-events-none' : ''}`}>
         <h1
           ref={textRef1}
@@ -217,7 +238,7 @@ export default function Hero() {
 
         <h1
           ref={textRef2}
-          className="w-full text-right relative h-[15vw] -mt-4 md:-mt-10"
+          className="w-full text-right relative h-[15vw] -mt-2 md:-mt-8"
         >
           <svg className="absolute inset-0 w-full h-full overflow-visible">
             <text

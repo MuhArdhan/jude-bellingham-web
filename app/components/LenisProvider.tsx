@@ -14,6 +14,11 @@ export default function LenisProvider({ children }: { children: ReactNode }) {
   const lenisRef = useRef<Lenis | null>(null);
 
   useEffect(() => {
+    // Force browser scroll restoration to manual
+    if ("scrollRestoration" in window.history) {
+      window.history.scrollRestoration = "manual";
+    }
+
     // Initialize Lenis
     const lenis = new Lenis({
       duration: 1.6,
@@ -26,9 +31,15 @@ export default function LenisProvider({ children }: { children: ReactNode }) {
     });
     lenisRef.current = lenis;
 
-    // Force scroll to top on reload to prevent erratic browser scroll restoration
+    // Force scroll to top immediately
     window.scrollTo(0, 0);
     lenis.scrollTo(0, { immediate: true });
+
+    // Ensure it stays at top on reload
+    const handleBeforeUnload = () => {
+      window.scrollTo(0, 0);
+    };
+    window.addEventListener("beforeunload", handleBeforeUnload);
 
     // Sync GSAP ScrollTrigger with Lenis
     lenis.on("scroll", ScrollTrigger.update);
@@ -42,6 +53,7 @@ export default function LenisProvider({ children }: { children: ReactNode }) {
     gsap.ticker.lagSmoothing(0);
 
     return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
       gsap.ticker.remove((time) => {
         lenis.raf(time * 1000);
       });

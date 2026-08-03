@@ -13,9 +13,8 @@ export default function ScrollIndicator() {
     const ctx = gsap.context(() => {
       const vh = window.innerHeight;
       const pageHeight = document.documentElement.scrollHeight;
-      // Make it much smaller in height than a standard scrollbar for a sleek look
-      const thumbHeight = Math.max((vh / pageHeight) * vh * 0.4, 5);
-      
+      const thumbHeight = Math.max((vh / pageHeight) * vh, 50);
+
       gsap.set(progressRef.current, { height: thumbHeight });
 
       // The thumb translates down the screen instantly with scroll
@@ -54,7 +53,7 @@ export default function ScrollIndicator() {
   }, []);
 
   return (
-    <div 
+    <div
       ref={wrapperRef}
       className="fixed top-0 right-1 w-1 h-screen bg-transparent z-50 pointer-events-none py-1 opacity-0 transition-none"
     >
