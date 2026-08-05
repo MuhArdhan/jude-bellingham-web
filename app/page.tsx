@@ -4,6 +4,7 @@ import Stats from "./components/Stats";
 import VerticalGallery from "./components/VerticalGallery";
 import HorizontalScroll from "./components/HorizontalScroll";
 import Belligol from "./components/Belligol";
+import Socials from "./components/Socials";
 
 export default function Home() {
   return (
@@ -26,6 +27,7 @@ export default function Home() {
       <VerticalGallery />
       <HorizontalScroll />
       <Belligol />
+      <Socials />
 
       {/* Simple Footer */}
       <footer className="py-20 bg-[#0a0a0a] text-center border-t border-[#1a1a1a]">
