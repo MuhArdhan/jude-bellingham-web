@@ -3,6 +3,7 @@ import Quote from "./components/Quote";
 import Stats from "./components/Stats";
 import VerticalGallery from "./components/VerticalGallery";
 import HorizontalScroll from "./components/HorizontalScroll";
+import Belligol from "./components/Belligol";
 
 export default function Home() {
   return (
@@ -24,7 +25,8 @@ export default function Home() {
 
       <VerticalGallery />
       <HorizontalScroll />
-      
+      <Belligol />
+
       {/* Simple Footer */}
       <footer className="py-20 bg-[#0a0a0a] text-center border-t border-[#1a1a1a]">
         <h2 className="font-[var(--font-oswald)] text-4xl md:text-6xl text-white uppercase font-bold mb-4">
