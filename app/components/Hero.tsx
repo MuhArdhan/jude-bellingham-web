@@ -109,17 +109,19 @@ export default function Hero() {
           x: t1OffsetX,
           y: t1OffsetY,
           scale: judeIntroScale,
-          transformOrigin: "left 85%"
+          transformOrigin: "left 85%",
+          opacity: 1
         });
         gsap.set(textRef2.current, {
           x: t2OffsetX,
           y: t2OffsetY,
           scale: bellIntroScale,
-          transformOrigin: "right 85%"
+          transformOrigin: "right 85%",
+          opacity: 1
         });
         gsap.set(judeTextRef.current, { strokeDasharray: 4000, strokeDashoffset: 4000, stroke: "#ffffff" });
         gsap.set(bellTextRef.current, { strokeDasharray: 4000, strokeDashoffset: 4000, fill: "transparent" });
-        gsap.set(imageRef.current, { yPercent: 100 });
+        gsap.set(imageRef.current, { yPercent: 100, opacity: 1 });
         gsap.set(bottomNavRef.current, { opacity: 0, y: 20 });
         gsap.set(preloaderBgRef.current, { opacity: 1 });
         
@@ -219,7 +221,7 @@ export default function Hero() {
       <div className={`z-20 flex flex-col w-full px-6 md:px-16 font-[var(--font-oswald)] uppercase leading-none relative mt-32 mb-auto md:mt-16 md:mb-0 ${isAnimating ? 'pointer-events-none' : ''}`}>
         <h1
           ref={textRef1}
-          className="w-full text-left relative h-[12vw]"
+          className="w-full text-left relative h-[12vw] opacity-0"
         >
           <svg className="absolute inset-0 w-full h-full overflow-visible">
             <text
@@ -238,7 +240,7 @@ export default function Hero() {
 
         <h1
           ref={textRef2}
-          className="w-full text-right relative h-[15vw] -mt-2 md:-mt-8"
+          className="w-full text-right relative h-[15vw] -mt-2 md:-mt-8 opacity-0"
         >
           <svg className="absolute inset-0 w-full h-full overflow-visible">
             <text
@@ -262,12 +264,12 @@ export default function Hero() {
           ref={imageRef}
           src="/image/jude-bellingham-hero.png"
           alt="Jude Bellingham"
-          className="w-full h-[85%] md:h-[120%] absolute md:static bottom-0 md:bottom-auto object-cover object-top md:object-center opacity-100"
+          className="w-full h-[85%] md:h-[120%] absolute md:static bottom-0 md:bottom-auto object-cover object-top md:object-center opacity-0"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#0a0a0a] z-40" />
       </div>
 
-      <div ref={bottomNavRef} className="absolute bottom-16 z-50 flex gap-4 text-lg font-sans uppercase tracking-widest text-[#CFB53B]">
+      <div ref={bottomNavRef} className="absolute bottom-16 z-50 flex gap-4 text-lg font-sans uppercase tracking-widest text-[#CFB53B] opacity-0">
         <span>Real Madrid</span>
         <span>•</span>
         <span>England</span>

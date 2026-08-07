@@ -15,8 +15,8 @@ const oswald = Oswald({
 });
 
 export const metadata: Metadata = {
-  title: "Jude Bellingham | Official Website",
-  description: "Interactive portfolio and stats for Jude Bellingham",
+  title: "Jude Bellingham | The Golden Boy",
+  description: "A cinematic tribute exploring the incredible journey, achievements, and pure passion of Jude Bellingham.",
 };
 
 export default function RootLayout({
