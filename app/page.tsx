@@ -1,10 +1,11 @@
 import Hero from "./components/Hero";
 import Quote from "./components/Quote";
 import Stats from "./components/Stats";
-import VerticalGallery from "./components/VerticalGallery";
-import HorizontalScroll from "./components/HorizontalScroll";
+import CareerJourney from "./components/CareerJourney";
+import CareerTrophy from "./components/CareerTrophy";
 import Belligol from "./components/Belligol";
 import Socials from "./components/Socials";
+import Footer from "./components/Footer";
 
 export default function Home() {
   return (
@@ -24,20 +25,12 @@ export default function Home() {
         </div>
       </div>
 
-      <VerticalGallery />
-      <HorizontalScroll />
+      <CareerJourney />
+      <CareerTrophy />
       <Belligol />
       <Socials />
 
-      {/* Simple Footer */}
-      <footer className="py-20 bg-[#0a0a0a] text-center border-t border-[#1a1a1a]">
-        <h2 className="font-[var(--font-oswald)] text-4xl md:text-6xl text-white uppercase font-bold mb-4">
-          Jude Bellingham
-        </h2>
-        <p className="text-gray-500 uppercase tracking-widest text-sm">
-          © {new Date().getFullYear()} - Designed with Lenis & GSAP
-        </p>
-      </footer>
+      <Footer />
     </main>
   );
 }
