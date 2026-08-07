@@ -28,13 +28,13 @@ const impactData = [
 
 const transitionImages = [
   "/image/jude-iconic.jpg",
-  "/image/journey/birmingham-1.jpg",
-  "/image/journey/birmingham-2.jpg",
-  "/image/journey/dortmund-1.jpg",
-  "/image/journey/dortmund-2.jpg",
+  "/image/journey/england-7.jpg",
+  "/image/journey/madrid-1.jpg",
+  "/image/journey/madrid-4.jpg",
+  "/image/journey/dortmund-7.jpg",
   "/image/journey/madrid-1.jpg",
   "/image/journey/madrid-2.jpg",
-  "/image/journey/england-1.jpg",
+  "/image/journey/dortmund-6.jpg",
 ];
 
 export default function Belligol() {
@@ -45,6 +45,7 @@ export default function Belligol() {
   const rightTextRefs = useRef<(HTMLDivElement | null)[]>([]);
   const flashbackRefs = useRef<(HTMLImageElement | null)[]>([]);
   const stageMediaRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const titleRef = useRef<HTMLHeadingElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -85,6 +86,10 @@ export default function Belligol() {
           { opacity: 0, x: 50 },
           { opacity: 1, x: 0, duration: 0.5, ease: "power2.out" },
           2);
+        tl.fromTo(titleRef.current,
+          { opacity: 0, y: -20 },
+          { opacity: 0.6, y: 0, duration: 0.5, ease: "power2.out" },
+          2);
 
         // Crossfade through the remaining text stages
         let currentTime = 3.5;
@@ -120,7 +125,7 @@ export default function Belligol() {
       });
 
       mm.add("(max-width: 767px)", () => {
-        buildTimeline("80vw", "60vh", "16px");
+        buildTimeline("60vw", "55vh", "8px");
       });
 
     }, containerRef);
@@ -133,21 +138,21 @@ export default function Belligol() {
 
       <div className="sticky top-0 w-full h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute left-6 md:left-16 top-10 md:top-16 z-20 pointer-events-none">
-          <h2 className="text-sm md:text-xl font-[var(--font-oswald)] font-bold text-white uppercase tracking-[0.3em] opacity-60">
+          <h2 ref={titleRef} className="text-sm md:text-xl font-[var(--font-oswald)] font-bold text-white uppercase tracking-[0.3em] opacity-0">
             The Belligol
           </h2>
         </div>
-        <div className="absolute left-6 md:left-16 bottom-16 md:bottom-24 flex flex-col z-10 w-full max-w-[50vw] md:max-w-md pointer-events-none">
+        <div className="absolute left-6 md:left-16 bottom-8 md:bottom-24 flex flex-col z-30 md:z-10 w-[45%] md:w-full md:max-w-md pointer-events-none">
           {impactData.map((item, i) => (
             <div
               key={`left-${i}`}
               ref={(el) => { leftTextRefs.current[i] = el; }}
               className="absolute bottom-0 left-0 w-full opacity-0 flex flex-col"
             >
-              <span className="text-[#CFB53B] font-[var(--font-oswald)] uppercase tracking-widest text-xs md:text-sm mb-2 md:mb-4">
+              <span className="text-[#CFB53B] font-[var(--font-oswald)] uppercase tracking-widest text-xs md:text-sm mb-1 md:mb-4 drop-shadow-md">
                 {item.subtitle}
               </span>
-              <h2 className="text-4xl md:text-7xl font-bold uppercase leading-[0.9] font-[var(--font-oswald)] drop-shadow-xl">
+              <h2 className="text-3xl md:text-7xl font-bold uppercase leading-tight md:leading-[0.9] font-[var(--font-oswald)] drop-shadow-2xl">
                 {item.title.split(' ').map((word, wordIdx) => (
                   <span key={wordIdx} className="block">
                     {word}
@@ -157,17 +162,17 @@ export default function Belligol() {
             </div>
           ))}
         </div>
-        <div className="absolute right-6 md:right-16 top-0 h-full z-10 w-full max-w-[45vw] md:max-w-xs pointer-events-none">
+        <div className="absolute inset-0 md:inset-auto md:right-16 md:top-0 md:h-full z-30 md:z-10 w-full md:max-w-xs pointer-events-none">
           {impactData.map((item, i) => (
             <div
               key={`right-${i}`}
               ref={(el) => { rightTextRefs.current[i] = el; }}
-              className="absolute inset-0 w-full h-full opacity-0"
+              className="absolute inset-0 md:inset-auto md:w-full md:h-full opacity-0"
             >
-              <h1 className="absolute top-[30%] md:top-[25%] right-0 text-6xl md:text-9xl font-[var(--font-oswald)] font-bold leading-none text-white opacity-40">
+              <h1 className="absolute top-8 right-6 md:top-[25%] md:right-0 text-6xl md:text-9xl font-[var(--font-oswald)] font-bold leading-none text-white opacity-40">
                 0{i + 1}
               </h1>
-              <p className="absolute bottom-16 md:bottom-24 left-0 text-gray-300 text-xs md:text-base font-sans leading-relaxed drop-shadow-md text-left">
+              <p className="absolute bottom-8 right-6 w-[45%] md:bottom-24 md:left-0 md:right-auto md:w-auto text-gray-200 md:text-gray-300 text-[10px] md:text-base font-sans leading-tight md:leading-relaxed drop-shadow-lg text-left">
                 {item.text}
               </p>
             </div>

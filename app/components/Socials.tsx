@@ -45,7 +45,7 @@ export default function Socials() {
           scrollTrigger: {
             trigger: sectionRef.current,
             start: "top 30%", // Wait until the section is much higher (cards are in view)
-            toggleActions: "play none none reverse", // Play on enter, reverse on leave back
+            toggleActions: "play none none none", // Play on enter, reverse on leave back
           },
           x: (i) => cardStates[i].x,
           y: (i) => cardStates[i].y,
@@ -63,7 +63,7 @@ export default function Socials() {
           scrollTrigger: {
             trigger: sectionRef.current,
             start: "top 40%", // Wait until cards are clearly visible on mobile
-            toggleActions: "play none none reverse",
+            toggleActions: "play none none none",
           },
           x: (i) => mobileCardStates[i].x,
           y: (i) => mobileCardStates[i].y,
@@ -83,9 +83,9 @@ export default function Socials() {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full min-h-[120vh] bg-[#0a0a0a] flex flex-col items-center pt-32 pb-40 overflow-hidden"
+      className="relative w-full min-h-[90vh] md:min-h-[120vh] bg-[#0a0a0a] flex flex-col items-center pt-24 md:pt-32 pb-24 md:pb-40 overflow-hidden"
     >
-      <div className="flex flex-col items-center mb-24 z-40 text-center">
+      <div className="flex flex-col items-center mb-16 md:mb-24 z-40 text-center">
         <h2 className="font-[var(--font-oswald)] text-5xl md:text-8xl text-white uppercase font-bold tracking-tighter leading-[0.9]">
           What's up
           <br />
@@ -95,7 +95,7 @@ export default function Socials() {
         </h2>
       </div>
 
-      <div className="relative w-full max-w-[240px] md:max-w-[300px] aspect-[9/16] flex items-center justify-center mx-auto mt-10 md:mt-0">
+      <div className="relative w-[45vw] md:w-full md:max-w-[300px] aspect-[9/16] flex items-center justify-center mx-auto mt-8 md:mt-0">
         {socialImages.map((src, i) => {
           const isHovered = hoveredIndex === i;
           const isLeftNeighbor = hoveredIndex !== null && i < hoveredIndex;
@@ -137,22 +137,22 @@ export default function Socials() {
         })}
       </div>
 
-      <div className="mt-16 md:mt-24 z-40 text-center flex flex-col items-center gap-12">
+      <div className="mt-20 md:mt-24 z-40 text-center flex flex-col items-center gap-8 md:gap-12">
         <span
-          className="text-sm md:text-lg font-[var(--font-oswald)] uppercase tracking-[0.3em] text-gray-400 border-b border-[#CFB53B]/50 pb-1"
+          className="text-xs md:text-lg font-[var(--font-oswald)] uppercase tracking-[0.3em] text-gray-400 border-b border-[#CFB53B]/50 pb-1"
         >
           Follow Jude on Social Media
         </span>
 
-        <div className="flex items-center justify-center gap-6 md:gap-12 text-xs md:text-sm font-[var(--font-oswald)] uppercase tracking-[0.3em] md:tracking-[0.4em] text-gray-500">
+        <div className="flex flex-wrap items-center justify-center gap-4 md:gap-12 text-[10px] md:text-sm font-[var(--font-oswald)] uppercase tracking-[0.2em] md:tracking-[0.4em] text-gray-500 w-[90vw] md:w-auto">
           <a href="https://www.instagram.com/judebellingham/" target="_blank" rel="noopener noreferrer" className="inline-block hover:text-[#CFB53B] hover:-translate-y-1 hover:scale-110 hover:drop-shadow-[0_0_10px_rgba(207,181,59,0.8)] transition-all duration-300">
             Instagram
           </a>
-          <span className="w-1.5 h-1.5 bg-[#CFB53B]/50 rounded-full"></span>
-          <a href="https://www.jb5app.com/" target="_blank" rel="noopener noreferrer" className="inline-block text-white font-bold text-lg md:text-2xl tracking-[0.4em] md:tracking-[0.5em] hover:text-[#CFB53B] hover:-translate-y-1.5 hover:scale-110 hover:drop-shadow-[0_0_15px_rgba(207,181,59,1)] transition-all duration-300">
+          <span className="w-1.5 h-1.5 shrink-0 bg-[#CFB53B]/50 rounded-full"></span>
+          <a href="https://www.jb5app.com/" target="_blank" rel="noopener noreferrer" className="inline-block text-white font-bold text-base md:text-2xl tracking-[0.4em] md:tracking-[0.5em] hover:text-[#CFB53B] hover:-translate-y-1.5 hover:scale-110 hover:drop-shadow-[0_0_15px_rgba(207,181,59,1)] transition-all duration-300">
             JB5
           </a>
-          <span className="w-1.5 h-1.5 bg-[#CFB53B]/50 rounded-full"></span>
+          <span className="w-1.5 h-1.5 shrink-0 bg-[#CFB53B]/50 rounded-full"></span>
           <a href="https://twitter.com/BellinghamJude" target="_blank" rel="noopener noreferrer" className="inline-block hover:text-[#CFB53B] hover:-translate-y-1 hover:scale-110 hover:drop-shadow-[0_0_10px_rgba(207,181,59,0.8)] transition-all duration-300">
             Twitter
           </a>

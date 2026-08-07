@@ -216,7 +216,7 @@ export default function Hero() {
         className="absolute h-[2px] bg-[#CFB53B] z-50 pointer-events-none"
       />
 
-      <div className={`z-20 flex flex-col w-full px-6 md:px-16 font-[var(--font-oswald)] uppercase leading-none relative mt-16 ${isAnimating ? 'pointer-events-none' : ''}`}>
+      <div className={`z-20 flex flex-col w-full px-6 md:px-16 font-[var(--font-oswald)] uppercase leading-none relative mt-32 mb-auto md:mt-16 md:mb-0 ${isAnimating ? 'pointer-events-none' : ''}`}>
         <h1
           ref={textRef1}
           className="w-full text-left relative h-[12vw]"
@@ -229,7 +229,7 @@ export default function Hero() {
               fill="transparent"
               stroke="#ffffff"
               strokeWidth="2"
-              style={{ fontSize: '12vw', fontWeight: 'bold' }}
+              className="font-bold text-[12vw]"
             >
               JUDE
             </text>
@@ -249,7 +249,7 @@ export default function Hero() {
               stroke="#ffffff"
               strokeWidth="2"
               textAnchor="end"
-              style={{ fontSize: '15vw', fontWeight: 'bold' }}
+              className="font-bold text-[15vw]"
             >
               BELLINGHAM
             </text>
@@ -262,7 +262,7 @@ export default function Hero() {
           ref={imageRef}
           src="/image/jude-bellingham-hero.png"
           alt="Jude Bellingham"
-          className="w-full h-[120%] object-cover opacity-100"
+          className="w-full h-[85%] md:h-[120%] absolute md:static bottom-0 md:bottom-auto object-cover object-top md:object-center opacity-100"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#0a0a0a] z-40" />
       </div>

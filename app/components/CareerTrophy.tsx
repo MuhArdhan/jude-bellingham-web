@@ -51,7 +51,7 @@ const achievements = [
   }
 ];
 
-export default function HorizontalScroll() {
+export default function CareerTrophy() {
   const containerRef = useRef<HTMLDivElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -85,12 +85,6 @@ export default function HorizontalScroll() {
   return (
     <section ref={containerRef} className="h-screen w-full bg-[#0a0a0a] overflow-hidden relative">
 
-      {/* Background Title */}
-      <div className="absolute top-1/2 -translate-y-1/2 left-0 w-full text-center opacity-5 pointer-events-none font-[var(--font-oswald)]">
-        <h2 className="text-[20vw] whitespace-nowrap text-white font-bold uppercase leading-none">
-          El Nuevo Galactico
-        </h2>
-      </div>
 
       <div
         ref={scrollRef}
@@ -100,7 +94,7 @@ export default function HorizontalScroll() {
         {achievements.map((item, i) => (
           <div
             key={i}
-            className="w-[70vw] md:w-[40vw] h-[60vh] md:h-[70vh] shrink-0 relative overflow-hidden rounded-sm group"
+            className="w-[80vw] md:w-[40vw] aspect-square md:aspect-auto md:h-[70vh] shrink-0 relative overflow-hidden rounded-sm group"
           >
             <img
               src={item.src}

@@ -58,7 +58,7 @@ const erasData = [
   }
 ];
 
-export default function VerticalGallery() {
+export default function CareerJourney() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const marqueeWrapperRef = useRef<HTMLDivElement>(null);
   const logosRef = useRef<(HTMLImageElement | null)[]>([]);
@@ -77,12 +77,12 @@ export default function VerticalGallery() {
           trigger: sectionRef.current,
           start: "top top",
           end: "bottom bottom",
-          scrub: 1, 
+          scrub: 1,
         }
       });
 
-      const eraDuration = 10; 
-      const initialBuffer = 1; 
+      const eraDuration = 10;
+      const initialBuffer = 1;
       const totalDuration = initialBuffer + (erasData.length * eraDuration);
 
       // Continuous background marquee moving leftwards
@@ -138,7 +138,11 @@ export default function VerticalGallery() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative w-full h-[3000vh] bg-[#0a0a0a]">
+    <section ref={sectionRef} className="relative w-full h-[1500vh] md:h-[3000vh] bg-[#0a0a0a] gallery-section">
+      <style>{`
+        .gallery-section { --gallery-scale: 2.5; }
+        @media (min-width: 768px) { .gallery-section { --gallery-scale: 1; } }
+      `}</style>
 
       <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 flex items-center justify-start z-0 overflow-hidden opacity-10 pointer-events-none">
@@ -173,8 +177,8 @@ export default function VerticalGallery() {
                 <div
                   key={`img-${i}-${imgIdx}`}
                   ref={(el) => { imagesRefs.current[i][imgIdx] = el; }}
-                  className="absolute rounded-sm overflow-hidden shadow-2xl shadow-black/60 opacity-0 transform"
-                  style={img.style as React.CSSProperties}
+                  className="absolute rounded-sm overflow-hidden shadow-2xl shadow-black/60 opacity-0 transform border border-[#CFB53B]/20"
+                  style={{ ...img.style, width: `calc(${img.style.width} * var(--gallery-scale))` } as React.CSSProperties}
                 >
                   <img
                     src={img.src}
